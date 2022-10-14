@@ -51,7 +51,9 @@ final class FieldStageView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
+    public func clearText() {
+        textField.text?.removeAll()
+    }
     
     public func setValues(buttonTitle: String, textFieldPlaceholder: String, buttonAction: ((_ textField: UITextField)->())?) {
         nextButton.setTitle(buttonTitle, for: .normal)

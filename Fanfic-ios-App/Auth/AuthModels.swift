@@ -19,8 +19,8 @@ enum SignInStage: CaseIterable {
 }
 
 enum RegistrationStage: CaseIterable {
-    case usernameInput
     case emailInput
+    case usernameInput
     case passwordInput
     case confirmPasswordInput
 }

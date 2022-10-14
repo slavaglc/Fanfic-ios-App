@@ -87,6 +87,7 @@ final class AuthViewFrame: UIView {
     }
     
     public func nextStage(for authType: AuthType) {
+        fieldStageView.clearText()
         if authType == .signIn {
             guard let currentSignInStage = currentSignInStage else { return }
             guard let index = SignInStage.allCases.firstIndex(of: currentSignInStage) else { return }

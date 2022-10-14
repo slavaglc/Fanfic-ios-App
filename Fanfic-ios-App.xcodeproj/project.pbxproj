@@ -28,6 +28,8 @@
 		F96DF67428F757F700CE376E /* AuthViewFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96DF67328F757F700CE376E /* AuthViewFrame.swift */; };
 		F96DF67728F759C500CE376E /* AuthStageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96DF67628F759C500CE376E /* AuthStageView.swift */; };
 		F96DF67A28F75A3800CE376E /* FieldStageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96DF67928F75A3800CE376E /* FieldStageView.swift */; };
+		F9D8C5F728FA0DF300FA0FE0 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D8C5F628FA0DF300FA0FE0 /* UIExtensions.swift */; };
+		F9D8C5FA28FA0E2500FA0FE0 /* ToastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D8C5F928FA0E2500FA0FE0 /* ToastController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,8 @@
 		F96DF67328F757F700CE376E /* AuthViewFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewFrame.swift; sourceTree = "<group>"; };
 		F96DF67628F759C500CE376E /* AuthStageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStageView.swift; sourceTree = "<group>"; };
 		F96DF67928F75A3800CE376E /* FieldStageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldStageView.swift; sourceTree = "<group>"; };
+		F9D8C5F628FA0DF300FA0FE0 /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
+		F9D8C5F928FA0E2500FA0FE0 /* ToastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +93,8 @@
 				F96DF65E28F74BF600CE376E /* Fonts */,
 				F96DF64128F7287600CE376E /* AppDelegate.swift */,
 				F96DF64328F7287600CE376E /* SceneDelegate.swift */,
+				F9D8C5F928FA0E2500FA0FE0 /* ToastController.swift */,
+				F9D8C5F828FA0DF900FA0FE0 /* Extensions */,
 				F96DF65728F7365E00CE376E /* Auth */,
 				F96DF64A28F7287900CE376E /* Assets.xcassets */,
 				F96DF64C28F7287900CE376E /* LaunchScreen.storyboard */,
@@ -142,6 +148,14 @@
 				F96DF67928F75A3800CE376E /* FieldStageView.swift */,
 			);
 			path = StageViews;
+			sourceTree = "<group>";
+		};
+		F9D8C5F828FA0DF900FA0FE0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F9D8C5F628FA0DF300FA0FE0 /* UIExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,8 +240,10 @@
 				F96DF65D28F736CB00CE376E /* AuthPresenter.swift in Sources */,
 				F96DF64228F7287600CE376E /* AppDelegate.swift in Sources */,
 				F96DF67728F759C500CE376E /* AuthStageView.swift in Sources */,
+				F9D8C5FA28FA0E2500FA0FE0 /* ToastController.swift in Sources */,
 				F96DF65B28F736B700CE376E /* AuthInteractor.swift in Sources */,
 				F96DF65928F736A100CE376E /* AuthViewController.swift in Sources */,
+				F9D8C5F728FA0DF300FA0FE0 /* UIExtensions.swift in Sources */,
 				F96DF67228F754EF00CE376E /* AuthModels.swift in Sources */,
 				F96DF67A28F75A3800CE376E /* FieldStageView.swift in Sources */,
 				F96DF64428F7287600CE376E /* SceneDelegate.swift in Sources */,

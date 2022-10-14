@@ -9,7 +9,8 @@ import UIKit
 
 
 protocol AuthDisplayLogic {
-    func displayEmailResponse()
+    func displayEmailIsVacant(response: String)
+    func displayEmailError(response: String)
 }
 
 final class AuthViewController: UIViewController {
@@ -65,16 +66,23 @@ final class AuthViewController: UIViewController {
     // MARK: - Actions
     
     private func setActions() {
-        viewFrame.setSignInAction(for: .emailInput, checkEmail(textField:))
+        viewFrame.setSignInAction(for: .emailInput, checkEmailForSignIn(textField:))
         viewFrame.setSignInAction(for: .passwordInput, checkPassword(textField:))
+        
+        viewFrame.setSignUpAction(for: .emailInput, checkEmailForSignUp(textField:))
+        
     }
     
     private func checkUserName(textField: UITextField) {
         
     }
     
-    private func checkEmail(textField: UITextField) {
-        interactor?.checkEmail(textField.text ?? "")
+    private func checkEmailForSignUp(textField: UITextField) {
+        interactor?.checkEmail(textField.text ?? "", for: .registration)
+    }
+    
+    private func checkEmailForSignIn(textField: UITextField) {
+        interactor?.checkEmail(textField.text ?? "", for: .signIn)
     }
     
     private func checkPassword(textField: UITextField) {
@@ -125,10 +133,15 @@ final class AuthViewController: UIViewController {
 
 // MARK: - Display logic
 extension AuthViewController: AuthDisplayLogic {
-    func displayEmailResponse() {
-        print("email works!")
+    func displayEmailIsVacant(response: String) {
+        print(response)
         viewFrame.nextStage(for: .signIn)
     }
     
-    
+    func displayEmailError(response: String) {
+        guard let font = UIFont(name: "Ubuntu-Medium", size: 16) else { return }
+        guard let image = UIImage(named: "error_icon") else { return }
+        showToast(message: response, font: font, image: image)
+    }
+
 }
