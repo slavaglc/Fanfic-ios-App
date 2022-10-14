@@ -9,7 +9,7 @@ import Foundation
 
 
 protocol AuthPresentationLogic {
-    
+    func presentCheckedEmail()
 }
 
 final class AuthPresenter {
@@ -20,5 +20,9 @@ final class AuthPresenter {
 
 // MARK: - Presentation logic
 extension AuthPresenter: AuthPresentationLogic {
+    func presentCheckedEmail() {
+        viewController?.displayEmailResponse()
+    }
+    
     
 }

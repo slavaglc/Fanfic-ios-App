@@ -11,8 +11,7 @@ import UIKit
 final class FieldStageView: UIView {
     
     
-    var currentSignInStage = SignInStage.allCases.first
-    var currentSignUpStage = RegistrationStage.allCases.first
+    private var buttonAction: ((_ textField: UITextField)->())? = nil
     
     
     private lazy var stackView: UIStackView = {
@@ -31,13 +30,14 @@ final class FieldStageView: UIView {
         return textField
     }()
     
-    private lazy var signUpButton: UIButton = {
+    private lazy var nextButton: UIButton = {
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 10
         button.setTitle("Дальше", for: .normal)
         button.tintColor = .white
         button.backgroundColor = .systemPink
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(buttonTapped(sender:)), for: .touchUpInside)
         return button
     }()
     
@@ -51,9 +51,21 @@ final class FieldStageView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    
+    public func setValues(buttonTitle: String, textFieldPlaceholder: String, buttonAction: ((_ textField: UITextField)->())?) {
+        nextButton.setTitle(buttonTitle, for: .normal)
+        textField.placeholder = textFieldPlaceholder
+        self.buttonAction = buttonAction
+    }
+    
+    @objc private func buttonTapped(sender: UIButton)  {
+        buttonAction?(textField)
+    }
+    
     private func setPrimarySettings() {
         stackView.addArrangedSubview(textField)
-        stackView.addArrangedSubview(signUpButton)
+        stackView.addArrangedSubview(nextButton)
         addSubview(stackView)
         setupConstraints()
     }

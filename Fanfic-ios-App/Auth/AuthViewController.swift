@@ -9,7 +9,7 @@ import UIKit
 
 
 protocol AuthDisplayLogic {
-    
+    func displayEmailResponse()
 }
 
 final class AuthViewController: UIViewController {
@@ -49,6 +49,7 @@ final class AuthViewController: UIViewController {
         super.viewDidLoad()
         setGUISettings()
         viewFrame.setStartStageView()
+        setActions()
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -63,19 +64,27 @@ final class AuthViewController: UIViewController {
     
     // MARK: - Actions
     
+    private func setActions() {
+        viewFrame.setSignInAction(for: .emailInput, checkEmail(textField:))
+        viewFrame.setSignInAction(for: .passwordInput, checkPassword(textField:))
+    }
     
-    
-    func checkEmail(textField: UITextField) {
+    private func checkUserName(textField: UITextField) {
         
     }
     
-    func checkPassword(textField: UITextField) {
+    private func checkEmail(textField: UITextField) {
+        interactor?.checkEmail(textField.text ?? "")
+    }
+    
+    private func checkPassword(textField: UITextField) {
+        print("password works!")
+    }
+    
+    private func confirmPassword(textField: UITextField) {
         
     }
     
-    func confirmPassword(textField: UITextField) {
-        
-    }
     
     // MARK: - GUI
     private func setGUISettings() {
@@ -116,5 +125,10 @@ final class AuthViewController: UIViewController {
 
 // MARK: - Display logic
 extension AuthViewController: AuthDisplayLogic {
+    func displayEmailResponse() {
+        print("email works!")
+        viewFrame.nextStage(for: .signIn)
+    }
+    
     
 }

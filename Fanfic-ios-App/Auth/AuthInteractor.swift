@@ -9,7 +9,7 @@ import Foundation
 
 
 protocol AuthInteractionLogic {
-    
+    func checkEmail(_ email: String)
 }
 
 final class AuthInteractor {
@@ -22,5 +22,9 @@ final class AuthInteractor {
 
 // MARK: - Interaction logic
 extension AuthInteractor: AuthInteractionLogic {
+    func checkEmail(_ email: String) {
+        presenter?.presentCheckedEmail()
+    }
+    
     
 }

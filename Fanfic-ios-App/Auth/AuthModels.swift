@@ -10,7 +10,7 @@ import Foundation
 
 
 enum AuthType {
-    case signIn, registration, unknow
+    case signIn, registration
 }
 
 enum SignInStage: CaseIterable {
