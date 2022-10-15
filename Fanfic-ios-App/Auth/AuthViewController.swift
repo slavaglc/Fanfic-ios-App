@@ -10,6 +10,7 @@ import UIKit
 
 protocol AuthDisplayLogic {
     func displayEmailIsVacant(response: String)
+    func displayEmailIsExist()
     func displayEmailError(response: String)
 }
 
@@ -21,7 +22,7 @@ final class AuthViewController: UIViewController {
     //  MARK: - UI Elements
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Fanficapp"
+        label.text = "FanficApp"
         label.textColor = UIColor(named: "MainTitleColors")
         label.font = UIFont(name: "Ubuntu-Medium", size: 28)
         label.textAlignment = .center
@@ -31,7 +32,7 @@ final class AuthViewController: UIViewController {
     
     private lazy var subtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Вход в аккаунт"
+        label.text = "Добро пожаловать!"
         label.font = UIFont(name: "Ubuntu-Regular", size: 16)
         label.textColor = UIColor(named: "SubtitleColors")
         label.textAlignment = .center
@@ -66,11 +67,19 @@ final class AuthViewController: UIViewController {
     // MARK: - Actions
     
     private func setActions() {
+        viewFrame.setStartAction(for: .signIn, action: startSignIn)
+        viewFrame.setStartAction(for: .registration, action: startSignUp)
         viewFrame.setSignInAction(for: .emailInput, checkEmailForSignIn(textField:))
         viewFrame.setSignInAction(for: .passwordInput, checkPassword(textField:))
-        
         viewFrame.setSignUpAction(for: .emailInput, checkEmailForSignUp(textField:))
-        
+    }
+    
+    private func startSignIn() {
+        subtitleLabel.text = "Вход в аккаунт"
+    }
+    
+    private func startSignUp() {
+        subtitleLabel.text = "Создание нового пользователя"
     }
     
     private func checkUserName(textField: UITextField) {
@@ -133,9 +142,13 @@ final class AuthViewController: UIViewController {
 
 // MARK: - Display logic
 extension AuthViewController: AuthDisplayLogic {
-    func displayEmailIsVacant(response: String) {
-        print(response)
+    
+    func displayEmailIsExist() {
         viewFrame.nextStage(for: .signIn)
+    }
+    
+    func displayEmailIsVacant(response: String) {
+        viewFrame.nextStage(for: .registration)
     }
     
     func displayEmailError(response: String) {

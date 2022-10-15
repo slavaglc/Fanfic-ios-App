@@ -47,6 +47,7 @@ final class ToastController: UIView {
                 
             }
         }
+        
     }
     
     private func animateMoveOut() {

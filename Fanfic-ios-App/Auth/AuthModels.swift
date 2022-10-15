@@ -25,3 +25,13 @@ enum RegistrationStage: CaseIterable {
     case confirmPasswordInput
 }
 
+struct User: Decodable {
+    let id: String
+    let email: String
+    let username: String
+    let about: String
+    let isBanned: Bool
+    let isAdmin: Bool
+    let isVerifed: Bool
+}
+

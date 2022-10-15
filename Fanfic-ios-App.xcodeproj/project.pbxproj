@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F91084AF28FAA4EE005D7734 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91084AE28FAA4EE005D7734 /* AuthError.swift */; };
 		F96DF64228F7287600CE376E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96DF64128F7287600CE376E /* AppDelegate.swift */; };
 		F96DF64428F7287600CE376E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96DF64328F7287600CE376E /* SceneDelegate.swift */; };
 		F96DF64B28F7287900CE376E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F96DF64A28F7287900CE376E /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F91084AE28FAA4EE005D7734 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		F96DF63E28F7287600CE376E /* Fanfic-ios-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fanfic-ios-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F96DF64128F7287600CE376E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F96DF64328F7287600CE376E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +73,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F91084B028FAA4F7005D7734 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F91084AE28FAA4EE005D7734 /* AuthError.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		F96DF63528F7287600CE376E = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +104,7 @@
 				F96DF64128F7287600CE376E /* AppDelegate.swift */,
 				F96DF64328F7287600CE376E /* SceneDelegate.swift */,
 				F9D8C5F928FA0E2500FA0FE0 /* ToastController.swift */,
+				F91084B028FAA4F7005D7734 /* Models */,
 				F9D8C5F828FA0DF900FA0FE0 /* Extensions */,
 				F96DF65728F7365E00CE376E /* Auth */,
 				F96DF64A28F7287900CE376E /* Assets.xcassets */,
@@ -245,6 +256,7 @@
 				F96DF65928F736A100CE376E /* AuthViewController.swift in Sources */,
 				F9D8C5F728FA0DF300FA0FE0 /* UIExtensions.swift in Sources */,
 				F96DF67228F754EF00CE376E /* AuthModels.swift in Sources */,
+				F91084AF28FAA4EE005D7734 /* AuthError.swift in Sources */,
 				F96DF67A28F75A3800CE376E /* FieldStageView.swift in Sources */,
 				F96DF64428F7287600CE376E /* SceneDelegate.swift in Sources */,
 				F96DF67428F757F700CE376E /* AuthViewFrame.swift in Sources */,

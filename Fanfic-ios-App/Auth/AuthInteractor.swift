@@ -17,7 +17,7 @@ final class AuthInteractor {
     //MARK: - Entities
     var presenter: AuthPresentationLogic?
     
-    
+    //MARK: - Actions
     private func getURLForEmailChecking(email: String) -> URL? {
         var components = URLComponents()
         components.scheme = "https"
@@ -35,6 +35,24 @@ final class AuthInteractor {
         urlRequest.httpMethod = "GET"
         return urlRequest
     }
+    
+    private func getUser(by data: Data) throws -> User  {
+        do {
+            let user = try JSONDecoder().decode(User.self, from: data)
+            print("user:", user)
+            return user
+        } catch(let error) {
+            let error = error as NSError
+            guard error.code == 4865 else { throw error }
+        }
+        
+        do {
+            let authError = try JSONDecoder().decode(AuthError.self, from: data)
+            throw authError.getError()
+        } catch(let error) {
+            throw error
+        }
+    }
 }
 
 
@@ -48,10 +66,15 @@ extension AuthInteractor: AuthInteractionLogic {
         URLSession.shared.dataTask(with: urlRequest) { [weak self] data, response, error in
             guard let response = response as? HTTPURLResponse else { return }
             let statusCode = response.statusCode
-            DispatchQueue.main.async {
-                print("statusCode:"  ,statusCode)
-                print("error:", error)
-                self?.presenter?.presentCheckedEmail(statusCode: statusCode, for: authType)
+            DispatchQueue.main.async { [weak self] in
+                guard let data = data else { return }
+                do {
+                let user = try self?.getUser(by: data)
+                    self?.presenter?.presentCheckedEmail(error: error, for: authType, user: user)
+                } catch(let error) {
+                    self?.presenter?.presentCheckedEmail(error: error, for: authType, user: nil)
+                }
+                
             }
         }.resume()
     }

@@ -9,7 +9,7 @@ import Foundation
 
 
 protocol AuthPresentationLogic {
-    func presentCheckedEmail(statusCode: Int, for authType: AuthType)
+    func presentCheckedEmail(error: Error?, for authType: AuthType, user: User?)
 }
 
 final class AuthPresenter {
@@ -20,14 +20,28 @@ final class AuthPresenter {
 
 // MARK: - Presentation logic
 extension AuthPresenter: AuthPresentationLogic {
-    func presentCheckedEmail(statusCode: Int, for authType: AuthType) {
-        let isVacant = statusCode != 200 && statusCode < 500
-        if isVacant {
+    func presentCheckedEmail(error: Error?, for authType: AuthType, user: User?) {
+        switch authType {
+        case .signIn:
+            if user == nil {
+                viewController?.displayEmailError(response: "Данный email не найден")
+            } else {
+                viewController?.displayEmailIsExist()
+            }
+        case .registration:
+            guard let error = error as? NSError else {
+                if user != nil {
+                    viewController?.displayEmailError(response: "Данный email занят")
+                } else {
+                viewController?.displayEmailError(response: "Неизвестная ошибка")
+                }
+                return
+            }
+            guard error.code == 3 else {
+                viewController?.displayEmailError(response: "Неизвестная ошибка")
+                return
+            }
             viewController?.displayEmailIsVacant(response: "Email свободен")
-        } else {
-            viewController?.displayEmailError(response: authType == .registration ? "Email занят" : "Данный email не зарегистрирован")
         }
     }
-    
-    
 }

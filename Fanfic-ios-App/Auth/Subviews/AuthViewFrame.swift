@@ -15,6 +15,8 @@ final class AuthViewFrame: UIView {
     
     private var signInActions: [SignInStage: (_ textfield: UITextField)->()] = [:]
     private var signUpActions: [RegistrationStage: (_ textfield: UITextField)->()] = [:]
+    private var startSignInAction = {}
+    private var startSignUpAction = {}
     
     private lazy var authStageView: AuthStageView = {
         let view = AuthStageView()
@@ -55,6 +57,7 @@ final class AuthViewFrame: UIView {
         fieldStageView.isHidden = false
         
         setSignInStage(currentSignInStage ?? SignInStage.emailInput)
+        startSignInAction()
     }
     
     public func startSignUp() {
@@ -62,6 +65,15 @@ final class AuthViewFrame: UIView {
         fieldStageView.isHidden = false
         
         setSignUpStage(currentSignUpStage ?? RegistrationStage.emailInput)
+        startSignUpAction()
+    }
+    
+    public func setStartAction(for authType: AuthType, action: @escaping ()->()) {
+        if authType == .signIn {
+            startSignInAction = action
+        } else {
+            startSignUpAction = action
+        }
     }
     
     public func setSignUpStage(_ stage: RegistrationStage) {
