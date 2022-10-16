@@ -14,24 +14,20 @@ enum AuthType {
 }
 
 enum SignInStage: CaseIterable {
-    case emailInput
-    case passwordInput
+    case emailInput, passwordInput
 }
 
 enum RegistrationStage: CaseIterable {
-    case emailInput
-    case usernameInput
-    case passwordInput
-    case confirmPasswordInput
+    case emailInput, usernameInput, passwordInput, confirmPasswordInput
 }
 
-struct User: Decodable {
-    let id: String
-    let email: String
-    let username: String
-    let about: String
-    let isBanned: Bool
-    let isAdmin: Bool
-    let isVerifed: Bool
+enum UserFindMethod {
+    case email(_ email: String), username(_ username: String)
 }
+
+struct AuthSession {
+    var email: String, username: String, password: String
+}
+
+
 

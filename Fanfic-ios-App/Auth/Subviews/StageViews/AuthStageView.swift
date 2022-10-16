@@ -28,6 +28,7 @@ final class AuthStageView: UIView {
         button.tintColor = .white
         button.backgroundColor = .systemPink
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 10
         button.tag = 0
         button.addTarget(self, action: #selector(buttonTapped(button:)), for: .touchUpInside)
         return button
@@ -39,6 +40,7 @@ final class AuthStageView: UIView {
         button.tintColor = .white
         button.backgroundColor = .systemPink
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 10
         button.tag = 1
         button.addTarget(self, action: #selector(buttonTapped(button:)), for: .touchUpInside)
         return button
@@ -62,7 +64,6 @@ final class AuthStageView: UIView {
     }
     
     private func setPrimarySettings() {
-        backgroundColor = .yellow
         stackView.addArrangedSubview(signInButton)
         stackView.addArrangedSubview(signUpButton)
         addSubview(stackView)

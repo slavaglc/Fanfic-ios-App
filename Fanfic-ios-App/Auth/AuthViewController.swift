@@ -9,9 +9,9 @@ import UIKit
 
 
 protocol AuthDisplayLogic {
-    func displayEmailIsVacant(response: String)
-    func displayEmailIsExist()
-    func displayEmailError(response: String)
+    func displayError(response: String)
+    func nextStage(for authType: AuthType)
+    func routeToMainVC(by authType: AuthType, token: String)
 }
 
 final class AuthViewController: UIViewController {
@@ -71,7 +71,12 @@ final class AuthViewController: UIViewController {
         viewFrame.setStartAction(for: .registration, action: startSignUp)
         viewFrame.setSignInAction(for: .emailInput, checkEmailForSignIn(textField:))
         viewFrame.setSignInAction(for: .passwordInput, checkPassword(textField:))
+        
         viewFrame.setSignUpAction(for: .emailInput, checkEmailForSignUp(textField:))
+        viewFrame.setSignUpAction(for: .usernameInput, createUsername(textField:))
+        viewFrame.setSignUpAction(for: .passwordInput, createPassword(textField:))
+        viewFrame.setSignUpAction(for: .confirmPasswordInput, confirmPassword(textField:))
+        
     }
     
     private func startSignIn() {
@@ -82,24 +87,28 @@ final class AuthViewController: UIViewController {
         subtitleLabel.text = "Создание нового пользователя"
     }
     
-    private func checkUserName(textField: UITextField) {
-        
+    private func createUsername(textField: UITextField) {
+        interactor?.checkUser(by: .username(textField.text?.lowercased() ?? ""), for: .registration)
     }
     
     private func checkEmailForSignUp(textField: UITextField) {
-        interactor?.checkEmail(textField.text ?? "", for: .registration)
+        interactor?.checkUser(by: .email(textField.text?.lowercased() ?? ""),  for: .registration)
     }
     
     private func checkEmailForSignIn(textField: UITextField) {
-        interactor?.checkEmail(textField.text ?? "", for: .signIn)
+        interactor?.checkUser(by: .email(textField.text?.lowercased() ?? ""), for: .signIn)
     }
     
     private func checkPassword(textField: UITextField) {
-        print("password works!")
+        interactor?.checkPassword(textField.text ?? "")
+    }
+    
+    private func createPassword(textField: UITextField) {
+        interactor?.createPassword(textField.text ?? "")
     }
     
     private func confirmPassword(textField: UITextField) {
-        
+        interactor?.confirmPassword(textField.text ?? "")
     }
     
     
@@ -143,18 +152,17 @@ final class AuthViewController: UIViewController {
 // MARK: - Display logic
 extension AuthViewController: AuthDisplayLogic {
     
-    func displayEmailIsExist() {
-        viewFrame.nextStage(for: .signIn)
+    func nextStage(for authType: AuthType) {
+        viewFrame.nextStage(for: authType)
     }
     
-    func displayEmailIsVacant(response: String) {
-        viewFrame.nextStage(for: .registration)
+    func routeToMainVC(by authType: AuthType, token: String) {
+        
     }
-    
-    func displayEmailError(response: String) {
+  
+    func displayError(response: String) {
         guard let font = UIFont(name: "Ubuntu-Medium", size: 16) else { return }
         guard let image = UIImage(named: "error_icon") else { return }
         showToast(message: response, font: font, image: image)
     }
-
 }

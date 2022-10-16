@@ -26,6 +26,8 @@ final class FieldStageView: UIView {
     private lazy var textField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "TextField"
+        textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -49,6 +51,10 @@ final class FieldStageView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func setSecureTextEntry(_ isSecure: Bool) {
+        textField.isSecureTextEntry = isSecure
     }
     
     public func clearText() {

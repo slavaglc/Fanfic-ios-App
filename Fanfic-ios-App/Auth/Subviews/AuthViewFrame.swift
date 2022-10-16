@@ -77,23 +77,30 @@ final class AuthViewFrame: UIView {
     }
     
     public func setSignUpStage(_ stage: RegistrationStage) {
+        currentSignUpStage = stage
+        fieldStageView.setSecureTextEntry(false)
         switch stage {
         case .usernameInput:
-            fieldStageView.setValues(buttonTitle: "Далее", textFieldPlaceholder: "Имя пользователя", buttonAction: signUpActions[stage])
+            fieldStageView.setValues(buttonTitle: "Далее", textFieldPlaceholder: "Имя пользователя (латиница)", buttonAction: signUpActions[stage])
         case .emailInput:
+            
             fieldStageView.setValues(buttonTitle: "Далее", textFieldPlaceholder: "Адрес электронной почты", buttonAction: signUpActions[stage])
         case .passwordInput:
+            fieldStageView.setSecureTextEntry(true)
             fieldStageView.setValues(buttonTitle: "Далее", textFieldPlaceholder: "Придумайте пароль", buttonAction: signUpActions[stage])
         case .confirmPasswordInput:
+            fieldStageView.setSecureTextEntry(true)
             fieldStageView.setValues(buttonTitle: "Завершить", textFieldPlaceholder: "Подтвердите пароль", buttonAction: signUpActions[stage])
         }
     }
     
     public func setSignInStage(_ stage: SignInStage) {
+        currentSignInStage = stage
         switch stage {
         case .emailInput:
             fieldStageView.setValues(buttonTitle: "Далее", textFieldPlaceholder: "Адрес электронной почты", buttonAction: signInActions[stage])
         case .passwordInput:
+            fieldStageView.setSecureTextEntry(true)
             fieldStageView.setValues(buttonTitle: "Ввести", textFieldPlaceholder: "Введите ваш пароль", buttonAction: signInActions[stage])
         }
     }
